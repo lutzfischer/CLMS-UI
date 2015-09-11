@@ -31,97 +31,83 @@
 
 		<link rel="stylesheet" href="./css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="./css/byrei-dyndiv_0.5.css">
+		<link rel="stylesheet" type="text/css" href="./css/jsontree.css">
 		<link rel="stylesheet" href="./css/style.css" />
 		<link rel="stylesheet" href="./css/xiNET.css">
 
 		<script type="text/javascript" src="./vendor/signals.js"></script>
         <script type="text/javascript" src="./vendor/byrei-dyndiv_1.0rc1-src.js"></script>
+        <script type="text/javascript" src="./vendor/jsontree.min.js"></script>
         <script type="text/javascript" src="./vendor/d3.js"></script>
         <script type="text/javascript" src="./vendor/colorbrewer.js"></script>
        	<script type="text/javascript" src="./vendor/FileSaver.js"></script>
         <script type="text/javascript" src="./vendor/Blob.js"></script>
         <script type="text/javascript" src="./vendor/rgbcolor.js"></script>
-		
-		<script type="text/javascript" src="/js/build/ngl.embedded.min.js"></script>
-		<!-- THREE -->
-<!--
-        <script src="../js/three/three.js"></script>
-        <script src="../js/three/Detector.js"></script>
-        <script src="../js/three/controls/TrackballControls.js"></script>
-        <script src="../js/three/loaders/OBJLoader.js"></script>
-        <script src="../js/three/loaders/PLYLoader.js"></script>
--->
 
-        <!-- LIB -->
-<!--
-        <script src="../js/lib/async.js"></script>
-        <script src="../js/lib/promise-6.0.0.min.js"></script>
-        <script src="../js/lib/sprintf.min.js"></script>
-        <script src="../js/lib/jszip.min.js"></script>
-        <script src="../js/lib/pako.min.js"></script>
-        <script src="../js/lib/lzma.js"></script>
-        <script src="../js/lib/bzip2.js"></script>
-        <script src="../js/lib/chroma.min.js"></script>
-        <script src="../js/lib/svd.js"></script>
-        <script src="../js/lib/signals.min.js"></script>
--->
-
-        <!-- NGL -->
-<!--
-        <script src="../js/ngl/core.js"></script>
-        <script src="../js/ngl/symmetry.js"></script>
-        <script src="../js/ngl/geometry.js"></script>
-        <script src="../js/ngl/structure.js"></script>
-        <script src="../js/ngl/trajectory.js"></script>
-        <script src="../js/ngl/surface.js"></script>
-        <script src="../js/ngl/script.js"></script>
-        <script src="../js/ngl/parser.js"></script>
-        <script src="../js/ngl/loader.js"></script>
-        <script src="../js/ngl/viewer.js"></script>
-        <script src="../js/ngl/buffer.js"></script>
-        <script src="../js/ngl/representation.js"></script>
-        <script src="../js/ngl/stage.js"></script>
-        <script src="../js/ngl/example.js"></script>
--->
-        
-        <!--spectrum dev-->
-        <script type="text/javascript" src="../spectrum/src/SpectrumViewer.js"></script>
-        <script type="text/javascript" src="../spectrum/src/FragmentationKey.js"></script>
-        <script type="text/javascript" src="../spectrum/src/graph/Graph.js"></script>
-        <script type="text/javascript" src="../spectrum/src/graph/Peak.js"></script>
-        <script type="text/javascript" src="../spectrum/src/graph/PeakAnnotations.js"></script>
-
-		<script type="text/javascript" src="../distance-slider/DistanceSlider.js"></script>
-        
-
-        <!--xiNET dev-->
-        <script type="text/javascript" src="../crosslink-viewer/src/controller/Init.js"></script>
-        <script type="text/javascript" src="../crosslink-viewer/src/controller/MouseEvents.js"></script>
-        <script type="text/javascript" src="../crosslink-viewer/src/controller/TouchEvents.js"></script>
-        <script type="text/javascript" src="../crosslink-viewer/src/controller/Layout.js"></script>
-        <script type="text/javascript" src="../crosslink-viewer/src/controller/Refresh.js"></script>
-        <script type="text/javascript" src="../crosslink-viewer/src/controller/ToolTips.js"></script>
-        <script type="text/javascript" src="../crosslink-viewer/src/model/Match.js"></script>
-        <script type="text/javascript" src="../crosslink-viewer/src/model/Link.js"></script>
-        <script type="text/javascript" src="../crosslink-viewer/src/model/Protein.js"></script>
-        <script type="text/javascript" src="../crosslink-viewer/src/model/Annotation.js"></script>
-        <script type="text/javascript" src="../crosslink-viewer/src/model/ProteinLink.js"></script>
-        <script type="text/javascript" src="../crosslink-viewer/src/model/ResidueLink.js"></script>
-        <script type="text/javascript" src="../crosslink-viewer/src/controller/ExternalControls.js"></script>
-        <script type="text/javascript" src="../crosslink-viewer/src/controller/Rotator.js"></script>
-        <script type="text/javascript" src="../crosslink-viewer/src/controller/xiNET_Storage.js"></script>
-        <script type="text/javascript" src="../crosslink-viewer/src/controller/ReadCSV.js"></script>
+        <script type="text/javascript" src="../interaction-viewer/build/interactionviewer.js"></script>
     </head>
     <body>
-<!--
 		<div class="dynDiv_setLimit">
--->
 
 			<div class="dynDiv" id="keyPanel">
-				<div class="dynDiv_moveParentDiv"><i class="fa fa-times-circle" onclick="showKeyPanel(false);"></i></div>
+				<div class="dynDiv_moveParentDiv"><i class="fa fa-times-circle" onclick="showLegendPanel(false);"></i></div>
 				<div class="panelInner">
+<!--
 					<div id="key"><img id="defaultLinkKey" src="./images/fig3_1.svg"><br><img id="logo" src="./images/logos/rappsilber-lab-small.png"></div>
-				</div>					
+-->
+			
+			
+				<!--
+					LEGEND
+	-->
+					<table>
+					 <tr>
+						<td>
+							<div style="float:right">
+								<img src="../interaction-viewer/demo/svgForKey/smallMol.svg"></td>
+							</div>
+						<td>Bioactive Entity</td>
+					  </tr>				  
+					 <tr>
+						<td>
+							<div style="float:right">
+								<img src="../interaction-viewer/demo/svgForKey/proteinBlob.svg" >
+							</div>
+							<div style="float:right">
+								<img src="../interaction-viewer/demo/svgForKey/proteinBar.svg">
+							</div>						
+						</td>
+						<td>
+							Protein<br>
+							 - click or tap to toggle between circle and bar (bar shows binding sites, if known).</td>
+					  </tr>
+					  <tr>
+						<td>
+							<div style="float:right">
+								<img src="../interaction-viewer/demo/svgForKey/gene.svg"></td>
+							</div>
+						<td>Gene</td>
+					  </tr>				  
+					  <tr>
+						<td>
+							<div style="float:right">
+								<img src="../interaction-viewer/demo/svgForKey/DNA.svg"></td>
+							</div>
+						<td>DNA</td>
+					  </tr>
+					<tr>
+						<td>
+							<div style="float:right">
+								<img src="../interaction-viewer/demo/svgForKey/RNA.svg"></td>
+							</div>
+						<td>RNA</td>
+					  </tr>
+					</table>
+
+				
+				<div id="colours"></div>
+			
+				</div>
 				<div class="dynDiv_resizeDiv_tl"></div>
 				<div class="dynDiv_resizeDiv_tr"></div>
 				<div class="dynDiv_resizeDiv_bl"></div>
@@ -139,36 +125,25 @@
 				<div class="dynDiv_resizeDiv_br"></div>
 			</div>
 
-			<div class="dynDiv" id="nglPanel">
-				<div class="dynDiv_moveParentDiv"><i class="fa fa-times-circle" onclick="showNglPanel(false);"></i></div>
-				<div class="panelInner" id='nglDiv'></div>
-				<div class="dynDiv_resizeDiv_tl"></div>
-				<div class="dynDiv_resizeDiv_tr"></div>
-				<div class="dynDiv_resizeDiv_bl"></div>
-				<div class="dynDiv_resizeDiv_br"></div>
-			</div>			
-			
-			<div class="dynDiv" id="spectrumPanel">
-				<div class="dynDiv_moveParentDiv"><i class="fa fa-times-circle" onclick="showSpectrumPanel(false);"></i></div>
-				<div class="panelInner" id='spectrumDiv'></div> 
+			<div class="dynDiv" id="miDataPanel">
+				<div class="dynDiv_moveParentDiv"><i class="fa fa-times-circle" onclick="showMiDataPanel(false);"></i></div>
+				<div class="panelInner" id='miDataDiv'></div>
 				<div class="dynDiv_resizeDiv_tl"></div>
 				<div class="dynDiv_resizeDiv_tr"></div>
 				<div class="dynDiv_resizeDiv_bl"></div>
 				<div class="dynDiv_resizeDiv_br"></div>
 			</div>
-			
 
-			
-<!--
+
+
 		</div>
--->
 
 		<!-- Main -->
 		<div id="main">
 
 			<div class="container">
-				<h1 class="page-header">
-					<i class="fa fa-home" onclick="window.location = './history.php';" title="Return to search history"></i>
+				<h1 class="page-header noSelect">
+					<i class="fa fa-home" onclick="window.location = './index.php';" title="About / Search"></i>
 <!--
 					http://pterkildsen.com/2014/07/13/styling-a-group-of-checkboxes-as-a-dropdown-via-css-and-javascript/
 -->
@@ -182,11 +157,11 @@
 									onclick="showKeyPanel(this.checked);" />Legend</label></li>
 							<li>
 								<label style="top:100px;">
-									<input type="checkbox" id="selectionChkBx" title="Toggle display of selection details" 
+									<input type="checkbox" id="selectionChkBx" title="Toggle display of selection details"
 									onclick="showSelectionPanel(this.checked)"/>Selection</label></li>
 							<li>
 								<label style="top:140px;">
-									<input type="checkbox" id="nglChkBx" title="Toggle display of 3d structure (NGL viewer)" 
+									<input type="checkbox" id="nglChkBx" title="Toggle display of 3d structure (NGL viewer)"
 									disabled onclick="showNglPanel(this.checked);"/>3D</label></li>
 							<li>
 								<label style="top:180px;">
@@ -195,23 +170,19 @@
 						</ul>
 					</div>
 -->
-					<p class="btn">Layout:</p>
-					<button class="btn btn-1 btn-1a" onclick="saveLayout();">Save</button>
-					<button class="btn btn-1 btn-1a" onclick="xlv.reset();">Reset</button>
-					<p class="btn">Export:</p>
-					<button class="btn btn-1 btn-1a" onclick="xlv.exportLinksCSV();">Links</button>
-					<button class="btn btn-1 btn-1a" onclick="xlv.exportMatchesCSV();">Matches</button>
-					<button class="btn btn-1 btn-1a" onclick="residueCount();">Residues</button>
-					<button class="btn btn-1 btn-1a" onclick="xlv.exportSVG();">SVG</button>
-					<label class="btn" style="display:none;">Legend
-							<input id="keyChkBx" onclick="showKeyPanel(this.checked);" type="checkbox"></label>
-					<label class="btn" style="margin-left:20px;padding-left:0px;">Selection
+
+					<button class="btn btn-1 btn-1a" onclick="xlv.reset();">Reset Layout</button>
+					<button class="btn btn-1 btn-1a" onclick="xlv.exportSVG();">Export SVG</button>
+					<label class="btn headerChkBx">Legend
+							<input id="keyChkBx" onclick="showLegendPanel(this.checked);" type="checkbox"></label>
+					<label class="btn headerChkBx">Publications
 							<input checked id="selectionChkBx" onclick="showSelectionPanel(this.checked)" type="checkbox"></label>
-					<label id="nglCbLabel" class="btn" style="padding-left:0px;">3D
-							<input id="nglChkBx" onclick="showNglPanel(this.checked);" type="checkbox"></label>
-					<label class="btn" style="padding-left:0px;display:none;">Help
+					<label id="miDataCbLabel" class="btn headerChkBx">MI Data
+							<input id="miDataChkBx" onclick="showMiDataPanel(this.checked);" type="checkbox"></label>
+					<label class="btn">Help
 							<input id="helpChkBx" onclick="showHelpPanel(this.checked)" type="checkbox"></label>
-				</h1>
+					<i class="fa fa-github" onclick="window.location = 'github.com';" title="GitHub Issue Tracking"></i>
+
    	 		</div>
 
 			<div>
@@ -220,82 +191,47 @@
 				<div id="bottomDiv"><div id="selectionDiv" class="panelInner"><p>No selection.</p></div></div>
 			</div>
 
-			<div class="controls">
-					<label>A
-						<input checked="checked"
-								   id="A"
-								   onclick="xlv.checkLinks();"
-								   type="checkbox"
-							/>
-					</label>
-					<label>B
-						<input checked="checked"
-								   id="B"
-								   onclick="xlv.checkLinks();"
-								   type="checkbox"
-							/>
-					</label>
-					<label>C
-						<input checked="checked"
-								   id="C"
-								   onclick="xlv.checkLinks();"
-								   type="checkbox"
-							/>
-					</label>
-					<label>?
-						<input id="Q"
-								   onclick="xlv.checkLinks();"
-								   type="checkbox"
-							/>
-					</label>
-					<label>auto
-						<input id="AUTO"
-								   onclick="xlv.checkLinks();"
-								   type="checkbox"
-							/>
-					</label>
+			<div class="controls noSelect">
+
 					<div id="scoreSlider">
 						<p class="scoreLabel" id="scoreLabel1"></p>
 						<input id="slide" type="range" min="0" max="100" step="1" value="0" oninput="sliderChanged()"/>
 						<p class="scoreLabel" id="scoreLabel2"></p>
 						<p id="cutoffLabel">(cut-off)</p>
 					</div> <!-- outlined scoreSlider -->
-
+					<label>Self-Interactions
+						<input checked="checked"
+							   id="selfLinks"
+							   onclick="xlv.showSelfLinks(document.getElementById('selfLinks').checked);"
+							   type="checkbox"
+						/>
+					</label>
+					<label>&nbsp;&nbsp;Negative Interactions
+						<input checked="checked"
+							   id="ambig"
+							   onclick="//xlv.showAmbig(document.getElementById('ambig').checked);"
+							   type="checkbox"
+						/>
+					</label>
 					<div style='float:right'>
-						<label>Self-Links
-							<input checked="checked"
-								   id="selfLinks"
-								   onclick="xlv.showSelfLinks(document.getElementById('selfLinks').checked)"
-								   type="checkbox"
-							/>
-						</label>
-						<label>&nbsp;&nbsp;Ambiguous
-							<input checked="checked"
-								   id="ambig"
-								   onclick="xlv.showAmbig(document.getElementById('ambig').checked)"
-								   type="checkbox"
-							/>
-						</label>
-						<label style="margin-left:20px;">Annot.:
+
+						<label style="margin-left:20px;">Interactor colour:
 							<select id="annotationsSelect" onChange="changeAnnotations();">
-								<option>None</option>
-								<option selected>Custom</option>
+								<option selected>MI features</option>
 								<option>UniprotKB</option>
 								<option>SuperFamily</option>
-								<option>Lysines</option>
+								<option>Organism</option>
+								<option>Interactor</option>
+								<option>None</option>
 							</select>
-						</label>						
-<!--
-						<label style="margin-left:20px;">Link colours:
--->
-							<select id="linkColourSelect" onChange="changeLinkColours();">
-								<option selected>SAS dist.</option>
-								<option>Euc. dist.</option>
-								<option>Search</option>
-							</select>
-<!--
 						</label>
--->
+						<label style="margin-left:20px;">Interaction colour:
+							<select id="linkColourSelect" onChange="changeLinkColours();">
+								<option selected>Detection Method</option>
+								<option>Publication</option>
+								<option>Interaction</option>
+							</select>
+						</label>
 					</div>
 				</div>
 			</div>

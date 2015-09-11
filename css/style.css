@@ -116,6 +116,19 @@ tbody tr:hover td, tbody tr:hover td a{
 	color: #091D42;
 	background:white;
 }
+.fa-github{
+	font-size:1.5em;
+	padding:4px;
+	vertical-align:middle;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+	cursor:pointer;
+}
+.fa-github:hover {
+	color: #091D42;
+	background:white;
+}
 .fa-times-circle{
 	vertical-align:baseline;
     -webkit-transition: all .3s;
@@ -139,11 +152,13 @@ tbody tr:hover td, tbody tr:hover td a{
 body, html{
     background: #fff;
     height:100%;
+/*
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: -moz-none;
     -o-user-select: none;
     user-select: none;   
+*/
 }
 body, input, select, textarea {
     Font-family: "Lato-Regular", Helvetica, Arial, sans-serif;
@@ -207,10 +222,21 @@ body, input, select, textarea {
     overflow:hidden;
 	z-index:-1;
 }
+.noSelect{
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    user-select: none;
+}
 .page-header p{
 	display: inline-block;
 	padding-right:1px;
 	padding-left:10px;
+}
+.headerChkBx{
+	margin-right:0px;
+	padding-right:0px;
 }
 /*view dropdown*/
 .checkbox-dropdown {
@@ -307,7 +333,13 @@ cursor: pointer; /* use correct mouse pointer when hovering over the dropdown */
 	height:100%;
 }
 #spectrumDiv {
-background-color: white;
+	background-color: white;
+}
+#miDataDiv {
+	background-color: white;
+	color: #777;
+	overflow:auto;
+	line-height:1em;
 }
 #selectionDiv {
 	overflow:auto;
@@ -535,7 +567,7 @@ tbody tr:hover td, tbody tr:hover td  {
     padding-top:20px;
     padding-bottom:20px;
 }
-#keyPanel, #helpPanel, #spectrumPanel, #nglPanel {
+#keyPanel, #helpPanel, #spectrumPanel, #nglPanel, #miDataPanel {
 	display:none;
 	top:100px;
 }
@@ -555,6 +587,11 @@ tbody tr:hover td, tbody tr:hover td  {
 	height:400px;
 }
 #nglPanel{
+	left: 40px;
+	width:400px;
+	height:400px;
+}
+#miDataPanel{
 	left: 40px;
 	width:400px;
 	height:400px;

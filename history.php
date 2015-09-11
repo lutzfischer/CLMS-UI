@@ -17,19 +17,11 @@
 //  You should have received a copy of the GNU General Public License
 //  along with CLMS-UI.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<?php
-session_start();
-if (!$_SESSION['session_name']) {
-    header("location:login.html");
-    exit;
-}
-header('Content-type: text/html; charset=utf-8');
-?>
 <!DOCTYPE HTML>
 <html>
 	<head>
 		<?php
-		$pageName = "History";
+		$pageName = "Index";
 		include("./php/head.php");
 		?>
 	</head>
@@ -38,38 +30,40 @@ header('Content-type: text/html; charset=utf-8');
 
 		<div class="container">
 			<h1 class="page-header">
-			<span class="headerLabel" style="font-weight:bold;"><?php echo $_SESSION['session_name'] ?>&nbsp;</span>
-					
-					<input type="radio" name="mineOrAll" value="mySearches" id="mySearches" checked onchange="loadSearchList();">
-					<span class="headerLabel">My Searches</span>
-					<input type="radio" name="mineOrAll" value="allSearches" id="allSearches" onchange="loadSearchList();">
-					<span class="headerLabel" >All Searches</span>
-					
-					
-<!--
-					<button class='btn btn-1 btn-1a' onclick='alert("Please do not press this button again.");'>
-						New Search
-					</button>	
--->
-					
-					<button class='btn btn-1 btn-1a' onclick='window.location = "../util/logout.php";'>
+
+			<span style="text-transform: uppercase;margin-right:10px;font-size:0.9em;font-weight:bold;">&nbsp;</span>
+<!--					<button class="btn btn-1 btn-1a" onclick="window.location = '../util/logout.php';">
 						Log Out
 					</button>
 				<div style='float:right'>
-					<button class='btn btn-1 btn-1a' onclick='aggregate();'>Aggregate</button>
-					<?php
-						if ($_SESSION['session_name'] == "adam"){
-							//~ echo "<button class='btn btn-1 btn-1a' onclick='aggregate3D();'>3D</button>";
-							echo "<button class='btn btn-1 btn-1a' onclick='aggregateMatrix();'>Matrix</button>";
-						}
-					?>
+					<button class="btn btn-1 btn-1a" onclick="aggregate();">
+						Aggregate
+					</button>
+
 				</div>
+-->
 
 			</h1>
 			<div class="tableContainer">
 				<table id='t1'>
-					<tbody id='tb1'>
-
+					<tbody>
+						<?php
+						include('../intactConnectionString.php');
+						//open connection
+						$dbconn = pg_connect($connectionString)
+							or die('Could not connect: ' . pg_last_error());
+						$result = pg_prepare($dbconn, "my_query",
+"select filename, count(uniprotkb) as pcount from uniprotkb_filename group by filename order by count(uniprotkb) ASC");
+						// Execute the prepared query
+						$result = pg_execute($dbconn, "my_query", []);
+						while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
+							$url = $line['filename'];//.'-'.$line['random_id'];
+							echo "<td><a href='./network.php?files=" . urlencode($url) . "'>" . $line['filename'] . "</a>" . "</td>";
+							echo "<td>" .$line['pcount'] . "</td>";
+							//~ echo  "<td class='centre'><input type='checkbox' class='aggregateCheckbox' value='". $url . "'></td>";
+							echo "</tr>\n";
+						}
+						?>
 					</tbody>
 				</table>
 			</div><!-- tableContainer -->
@@ -77,56 +71,15 @@ header('Content-type: text/html; charset=utf-8');
 
         <script>
 			//<![CDATA[
-			
-			var dynTable;
-			
-			function loadSearchList(){
-				
-				DynamicTable.destroy("t1");
-				document.getElementById("t1").innerHTML = "";
-				
-				var xmlhttp = new XMLHttpRequest();
-				var url = "./php/searches.php";
-				var params;
-				//~ console.log('^'+xlv.sid+'^');
-				if (document.getElementById('mySearches').checked){
-					params =  "searches=MINE";
-					var opt1 = {
-						colTypes: ["alpha","none", "none", "none", "alpha", "alpha","number","none", "clearCheckboxes"],
-						pager: {
-						rowsCount: 20
-						}
-					}
+
+			var opt1 = {
+				colTypes: ["alpha","none", "alpha", "alpha", "clearCheckboxes"],
+				pager: {
+				rowsCount: 30
 				}
-				else {
-					params =  "searches=ALL";
-					var opt1 = {
-						colTypes: ["alpha","none", "none", "none", "alpha", "alpha","number","alpha", "clearCheckboxes"],
-						pager: {
-						rowsCount: 20
-						}
-					}
-				}
-				xmlhttp.open("POST", url, true);
-				//Send the proper header information along with the request
-				xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				xmlhttp.onreadystatechange = function() {//Call a function when the state changes.
-					if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-						//~ console.log(xmlhttp.responseText);
-						document.getElementById("t1").innerHTML = xmlhttp.responseText;
-						dynTable = new DynamicTable("t1", opt1);
-						if (document.getElementById('mySearches').checked){
-							document.getElementsByClassName("tool-8")[0].setAttribute("style", "width:0px;");
-						}
-						else {
-							//~ document.getElementByClassName("tool-8")[0].setAttribute("style", "width:90px;");
-						}
-					}
-				}
-				xmlhttp.send(params);
 			}
-			loadSearchList();
-				
+			new DynamicTable("t1", opt1);
+
             function aggregate(){
 				var inputs = document.getElementsByClassName('aggregateCheckbox');
                 var values = new Array();
@@ -138,48 +91,6 @@ header('Content-type: text/html; charset=utf-8');
                 if (values.length === 0) alert ("Cannot aggregate: no selection - use checkboxes in right most table column.");
                 else {
                     window.open("./network.php?sid="+values.join(','), "_self");
-                }
-            }
-
-           function aggregate(){
-				var inputs = document.getElementsByClassName('aggregateCheckbox');
-                var values = new Array();
-                for (var i = 0; i < inputs.length; i++) {
-                    if (inputs[i].checked) {
-                        values.push(inputs[i].value);
-                    }
-                }
-                if (values.length === 0) alert ("Cannot aggregate: no selection - use checkboxes in right most table column.");
-                else {
-                    window.open("./network.php?sid="+values.join(','), "_self");
-                }
-            }
-
-           function aggregate3D(){
-				var inputs = document.getElementsByClassName('aggregateCheckbox');
-                var values = new Array();
-                for (var i = 0; i < inputs.length; i++) {
-                    if (inputs[i].checked) {
-                        values.push(inputs[i].value);
-                    }
-                }
-                if (values.length === 0) alert ("Cannot aggregate: no selection - use checkboxes in right most table column.");
-                else {
-                    window.open("./network_3D.php?sid="+values.join(','), "_self");
-                }
-            }
-
-           function aggregateMatrix(){
-				var inputs = document.getElementsByClassName('aggregateCheckbox');
-                var values = new Array();
-                for (var i = 0; i < inputs.length; i++) {
-                    if (inputs[i].checked) {
-                        values.push(inputs[i].value);
-                    }
-                }
-                if (values.length === 0) alert ("Cannot aggregate: no selection - use checkboxes in right most table column.");
-                else {
-                    window.open("./matrix.php?sid="+values.join(','), "_self");
                 }
             }
 
