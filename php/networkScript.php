@@ -135,7 +135,7 @@
 		xlv = new xiNET(targetDiv);
 		
 		<?php
-		include './php/loadData.php';
+		include './php/loadMiData.php';
 		?>
 		document.getElementById("miDataDiv").innerHTML = "<pre>"+JSON.stringify(data, null, "\t")+"<\pre>";
 		// could also use http://bl.ocks.org/mbostock/4339083
