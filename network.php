@@ -215,7 +215,7 @@
 					</label>
 					<div style='float:right'>
 
-						<label style="margin-left:20px;">Interactor colour:
+						<label style="margin-left:20px;">Molecule colour:
 							<select id="annotationsSelect" onChange="changeAnnotations();">
 								<option selected>MI features</option>
 								<option>UniprotKB</option>
@@ -225,7 +225,7 @@
 								<option>None</option>
 							</select>
 						</label>
-						<label style="margin-left:20px;">Interaction colour:
+						<label style="margin-left:20px;">Link colour:
 							<select id="linkColourSelect" onChange="changeLinkColours();">
 								<option selected>Detection Method</option>
 								<option>Publication</option>

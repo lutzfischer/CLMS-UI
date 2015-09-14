@@ -20,16 +20,30 @@
 
 
 	$startTime = microtime(true);
-	$sid = urldecode($_GET["files"]);
-
-						include('../intactConnectionString.php');
-						//open connection
-						$dbconn = pg_connect($connectionString)
-							or die('Could not connect: ' . pg_last_error());
-						$result = pg_prepare($dbconn, "my_query",
-"select jsondata from filename_json where filename like $1");
-						// Execute the prepared query
-						$result = pg_execute($dbconn, "my_query", [$sid]);
+	
+	$param = urldecode($_GET["files"]);
+	
+	$pattern = '/[^0-9,_(negative)(\.xml)]/';
+	if (preg_match($pattern, $param)){
+		echo ("//error");
+		exit;
+	}
+	
+	$files = explode("'", $param);
+	$in = '';
+	for ($i = 0; $i < count($files); $i++) {
+		if ($i > 0){
+			$in = $in.',';
+		}
+		$in = $in."'".$files[$i]."'"; 
+	}
+	$query = "SELECT jsondata FROM filename_json WHERE filename IN (".$in.");";
+	
+	include('../intactConnectionString.php');
+	//open connection
+	$dbconn = pg_connect($connectionString)
+		or die('Could not connect: ' . pg_last_error());
+	$result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
 
 	$line = pg_fetch_array($result, null, PGSQL_ASSOC);
 	echo 'var data = '.$line['jsondata'].';';

@@ -54,7 +54,9 @@
 				topDivHeight = window.innerHeight - top - splitterDivHeight - minBottomDivHeight- marginBottom;
 			}
 			topDiv.setAttribute("style", "height:"+topDivHeight+"px;");
-			bottomDiv.setAttribute("style", "height:"+bottomDivHeight+"px;");
+			if (document.getElementById('keyChkBx').checked == true) {
+				bottomDiv.setAttribute("style", "height:"+bottomDivHeight+"px;");
+			}
 		};
 	}
 	main.onmouseup = function(evt) {
@@ -210,7 +212,7 @@
 			}
 		});
 */
-		xlv.legendCallbacks.push(function (linkColours, domainColours) {
+		xlv.legendCallbacks.push(function (linkColours, colourAssignment) {
 					var coloursKeyDiv = document.getElementById('colours');			
 					if (colourAssignment){
 						//html legened
