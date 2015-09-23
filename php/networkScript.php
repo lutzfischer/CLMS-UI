@@ -139,16 +139,16 @@
 		<?php
 		include './php/loadMiData.php';
 		?>
-		document.getElementById("miDataDiv").innerHTML = "<pre>"+JSON.stringify(data, null, "\t")+"<\pre>";
+		//~ document.getElementById("miDataDiv").innerHTML = "<pre>"+JSON.stringify(data, null, "\t")+"<\pre>";
 		// could also use http://bl.ocks.org/mbostock/4339083
-		//~ document.getElementById("miDataDiv").innerHTML = JSONTree.create(data);
+		document.getElementById("miDataDiv").innerHTML = JSONTree.create(data);
 			
 			
 		xlv.readMIJSON(data, false);
 						
 		/* Init filter bar */
 		initSlider();
-		changeAnnotations();
+		//changeAnnotations();
 		xlv.selfLinksShown = document.getElementById('selfLinks').checked;
 		xlv.ambigShown = document.getElementById('ambig').checked;
 		xlv.filter = function (match) {
